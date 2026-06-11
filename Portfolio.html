@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پورتفولیوی من | نِیما</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn', sans-serif;}
+    body {background:#0f0f0f; color:#f5f5f5; transition: background 0.3s, color 0.3s;}
+    header {display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:#1c1c1c; position:sticky; top:0; z-index:10;}
+    header h1 {color:#ff7b00;}
+    nav a {color:#fff; text-decoration:none; margin:0 10px; transition:color 0.3s;}
+    nav a:hover {color:#ff7b00;}
+    .hero {display:flex; flex-direction:column; align-items:center; justify-content:center; height:90vh; background:linear-gradient(to right, #1c1c1c, #292929); text-align:center;}
+    .hero h2 {font-size:2.2rem; margin-bottom:10px; color:#ff7b00;}
+    .hero p {max-width:600px; line-height:1.8; color:#ccc;}
+    .btn {background:#ff7b00; color:#fff; padding:10px 20px; border:none; border-radius:30px; margin-top:20px; cursor:pointer; transition:background 0.3s;}
+    .btn:hover {background:#e56f00;}
+
+    section {padding:60px 10%;}
+    section h3 {font-size:1.8rem; margin-bottom:30px; color:#ff7b00; text-align:center;}
+    .projects {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px;}
+    .card {background:#1f1f1f; border-radius:15px; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s;}
+    .card:hover {transform:translateY(-8px); box-shadow:0 6px 20px rgba(0,0,0,0.4);}
+    .card img {width:100%; height:180px; object-fit:cover;}
+    .card-content {padding:15px;}
+    .card-content h4 {margin-bottom:10px; color:#fff;}
+    .card-content p {font-size:0.9rem; color:#ccc;}
+
+    .about {display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center;}
+    .about img {width:250px; border-radius:50%; border:3px solid #ff7b00;}
+    .about-text {max-width:500px;}
+
+    form {display:flex; flex-direction:column; max-width:400px; margin:auto; gap:15px;}
+    input, textarea {padding:10px; border:none; border-radius:5px;}
+    input:focus, textarea:focus {outline:2px solid #ff7b00;}
+
+    footer {text-align:center; padding:20px; background:#1c1c1c; color:#777; margin-top:40px;}
+
+    .toggle-mode {position:fixed; bottom:20px; left:20px; background:#ff7b00; color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:20px; cursor:pointer; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+
+    body.light {background:#f5f5f5; color:#222;}
+    body.light header {background:#fff;}
+    body.light .card {background:#fff;}
+    body.light nav a {color:#333;}
+    body.light .btn {background:#222;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>پورتفولیوی من</h1>
+    <nav>
+      <a href="#home">خانه</a>
+      <a href="#projects">پروژه‌ها</a>
+      <a href="#about">درباره من</a>
+      <a href="#contact">تماس</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h2>سلام! من نِیما هستم 👋</h2>
+    <p>طراح وب، عاشق خلق تجربه‌های زیبا در دنیای دیجیتال. این پورتفولیوی شخصی من است که در آن پروژه‌ها و مسیر رشدم را به نمایش می‌گذارم.</p>
+    <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">مشاهده پروژه‌ها</button>
+  </section>
+
+  <section id="projects">
+    <h3>پروژه‌های اخیر من</h3>
+    <div class="projects">
+      <div class="card">
+        <img src="https://placehold.co/400x180" alt="project1">
+        <div class="card-content">
+          <h4>وب‌سایت فروشگاهی</h4>
+          <p>طراحی واکنش‌گرا و مدرن با HTML، CSS و JavaScript.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/400x180" alt="project2">
+        <div class="card-content">
+          <h4>وب‌اپلیکیشن مدیریت کارها</h4>
+          <p>برنامه‌ریزی روزانه با رابط کاربری ساده و کاربردی.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/400x180" alt="project3">
+        <div class="card-content">
+          <h4>پورتفولیوی شخصی</h4>
+          <p>نمایش مهارت‌ها و پروژه‌ها با طراحی جذاب و سبک تیره.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h3>درباره من</h3>
+    <div class="about">
+      <img src="https://placehold.co/250x250" alt="Profile">
+      <div class="about-text">
+        <p>من نِیما هستم، طراح و توسعه‌دهنده وب با علاقه به رابط کاربری و تجربه کاربر. در طراحی‌هایم سادگی، سرعت و هماهنگی اهمیت زیادی دارد.</p>
+        <p>مهارت‌ها: HTML، CSS، JavaScript، طراحی واکنش‌گرا، UX/UI</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h3>تماس با من</h3>
+    <form>
+      <input type="text" placeholder="نام شما" required>
+      <input type="email" placeholder="ایمیل" required>
+      <textarea rows="5" placeholder="پیام شما"></textarea>
+      <button class="btn" type="submit">ارسال</button>
+    </form>
+  </section>
+
+  <footer>
+    © ۲۰۲۵ طراحی شده توسط نِیما | تمامی حقوق محفوظ است
+  </footer>
+
+  <button class="toggle-mode" onclick="toggleMode()">☀️</button>
+
+  <script>
+    function toggleMode(){
+      document.body.classList.toggle('light');
+      const btn=document.querySelector('.toggle-mode');
+      btn.textContent=document.body.classList.contains('light')?'🌙':'☀️';
+    }
+  </script>
+</body>
+</html>
