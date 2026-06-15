@@ -5,51 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>پورتفولیوی من | نِیما</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap');
     * {margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn', sans-serif;}
-    body {background:#0f0f0f; color:#f5f5f5; transition: background 0.3s, color 0.3s;}
-    header {display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:#1c1c1c; position:sticky; top:0; z-index:10;}
-    header h1 {color:#ff7b00;}
-    nav a {color:#fff; text-decoration:none; margin:0 10px; transition:color 0.3s;}
-    nav a:hover {color:#ff7b00;}
-    .hero {display:flex; flex-direction:column; align-items:center; justify-content:center; height:90vh; background:linear-gradient(to right, #1c1c1c, #292929); text-align:center;}
-    .hero h2 {font-size:2.2rem; margin-bottom:10px; color:#ff7b00;}
-    .hero p {max-width:600px; line-height:1.8; color:#ccc;}
-    .btn {background:#ff7b00; color:#fff; padding:10px 20px; border:none; border-radius:30px; margin-top:20px; cursor:pointer; transition:background 0.3s;}
-    .btn:hover {background:#e56f00;}
 
-    section {padding:60px 10%;}
-    section h3 {font-size:1.8rem; margin-bottom:30px; color:#ff7b00; text-align:center;}
-    .projects {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px;}
-    .card {background:#1f1f1f; border-radius:15px; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s;}
-    .card:hover {transform:translateY(-8px); box-shadow:0 6px 20px rgba(0,0,0,0.4);}
-    .card img {width:100%; height:180px; object-fit:cover;}
-    .card-content {padding:15px;}
-    .card-content h4 {margin-bottom:10px; color:#fff;}
-    .card-content p {font-size:0.9rem; color:#ccc;}
+    :root {
+      --orange: #ff7b00;
+      --orange-light: #ff9a3c;
+      --orange-dark: #cc6200;
+      --bg: #080a0f;
+      --bg2: #0d1018;
+      --bg3: #111520;
+      --border: #1a1f2e;
+      --text: #f5f0e8;
+      --text-muted: #4a5068;
+      --tag-bg: #1a1208;
+      --tag-border: #3d2800;
+    }
 
-    .about {display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center;}
-    .about img {width:250px; border-radius:50%; border:3px solid #ff7b00;}
-    .about-text {max-width:500px;}
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; overflow-x: hidden; }
 
-    form {display:flex; flex-direction:column; max-width:400px; margin:auto; gap:15px;}
-    input, textarea {padding:10px; border:none; border-radius:5px;}
-    input:focus, textarea:focus {outline:2px solid #ff7b00;}
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
 
-    footer {text-align:center; padding:20px; background:#1c1c1c; color:#777; margin-top:40px;}
+    /* HEADER */
+    header { display:flex; justify-content:space-between; align-items:center; padding:16px 50px; background: rgba(13,16,24,0.9); position:sticky; top:0; z-index:100; border-bottom:1px solid var(--border); backdrop-filter: blur(10px); }
+    header h1 { color: var(--orange); font-weight:700; font-size:20px; }
+    nav a { color: var(--text-muted); text-decoration:none; margin:0 10px; transition:color 0.3s; font-size:14px; position: relative; }
+    nav a::after { content:''; position:absolute; bottom:-4px; right:0; width:0; height:2px; background:var(--orange); transition: width 0.3s; }
+    nav a:hover { color: var(--orange); }
+    nav a:hover::after { width: 100%; }
 
-    .toggle-mode {position:fixed; bottom:20px; left:20px; background:#ff7b00; color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:20px; cursor:pointer; box-shadow:0 0 10px rgba(0,0,0,0.3);}
+    /* HERO */
+    .hero { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:90vh; background: var(--bg); text-align:center; padding: 60px 20px; position: relative; overflow: hidden; }
+    .hero::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background: radial-gradient(circle, rgba(255,123,0,0.06) 0%, transparent 70%); pointer-events:none; }
+    .hero-tag { display:inline-block; background: var(--tag-bg); color: var(--orange-light); font-size:12px; padding:5px 16px; border-radius:20px; border:1px solid var(--tag-border); margin-bottom:20px; animation: fadeDown 0.6s ease; }
+    .hero h2 { font-size:2.6rem; margin-bottom:14px; color: var(--text); font-weight:700; line-height:1.5; animation: fadeDown 0.7s ease; }
+    .hero h2 span { color: var(--orange); }
+    .hero p { max-width:550px; line-height:2; color: var(--text-muted); margin-bottom:30px; animation: fadeDown 0.8s ease; }
+    .btns { display:flex; gap:14px; justify-content:center; animation: fadeDown 0.9s ease; }
+    .btn-main { background: var(--orange); color: #080a0f; padding:12px 28px; border:none; border-radius:8px; cursor:pointer; font-family:'Vazirmatn',sans-serif; font-size:14px; font-weight:700; transition: all 0.3s; }
+    .btn-main:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .btn-sec { background:transparent; color: var(--orange); padding:12px 28px; border:1px solid var(--tag-border); border-radius:8px; cursor:pointer; font-family:'Vazirmatn',sans-serif; font-size:14px; transition: all 0.3s; }
+    .btn-sec:hover { border-color: var(--orange); transform: translateY(-2px); }
 
-    body.light {background:#f5f5f5; color:#222;}
-    body.light header {background:#fff;}
-    body.light .card {background:#fff;}
-    body.light nav a {color:#333;}
-    body.light .btn {background:#222;}
+    /* SECTIONS */
+    section { padding:70px 10%; }
+    .section-title { display:flex; align-items:center; gap:12px; margin-bottom:36px; justify-content:center; }
+    .section-title span { color: var(--orange); font-size:14px; font-weight:600; }
+    .section-title h3 { font-size:1.7rem; color: var(--text); font-weight:700; }
+
+    /* PROJECTS */
+    .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .card { background: var(--bg2); border-radius:12px; overflow:hidden; border:1px solid var(--border); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; opacity:0; transform: translateY(30px); }
+    .card.visible { opacity:1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s; }
+    .card:hover { border-color: var(--orange); transform: translateY(-8px); box-shadow: 0 12px 30px rgba(255,123,0,0.1); }
+    .card-img { background: var(--bg3); height:180px; display:flex; align-items:center; justify-content:center; font-size:52px; transition: transform 0.3s; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-content { padding:18px; }
+    .card-content h4 { margin-bottom:8px; color: var(--text); font-weight:600; font-size:15px; }
+    .card-content p { font-size:13px; color: var(--text-muted); line-height:1.8; }
+    .card-tag { display:inline-block; background: var(--tag-bg); color: var(--orange-light); font-size:11px; padding:3px 10px; border-radius:4px; margin-top:10px; border:1px solid var(--tag-border); }
+
+    /* ABOUT */
+    .about { display:flex; flex-wrap:wrap; gap:40px; align-items:center; justify-content:center; }
+    .about img { width:220px; height:220px; border-radius:50%; border:3px solid var(--orange); object-fit:cover; transition: transform 0.3s, box-shadow 0.3s; }
+    .about img:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,123,0,0.2); }
+    .about-text { max-width:500px; }
+    .about-text p { color: var(--text-muted); line-height:1.9; margin-bottom:14px; font-size:14px; }
+    .skills { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    .skill { background: var(--tag-bg); color: var(--orange-light); font-size:12px; padding:5px 14px; border-radius:20px; border:1px solid var(--tag-border); transition: all 0.3s; cursor: default; }
+    .skill:hover { background: var(--orange); color: #080a0f; border-color: var(--orange); }
+
+    /* CONTACT */
+    form { display:flex; flex-direction:column; max-width:500px; margin:auto; gap:14px; }
+    input, textarea { padding:13px 16px; border:1px solid var(--border); border-radius:8px; background: var(--bg2); color: var(--text); font-family:'Vazirmatn',sans-serif; font-size:14px; transition: border-color 0.3s; }
+    input:focus, textarea:focus { outline:none; border-color: var(--orange); }
+    input::placeholder, textarea::placeholder { color: var(--text-muted); }
+
+    /* FOOTER */
+    footer { text-align:center; padding:20px; background: var(--bg2); color: var(--border); margin-top:0; border-top:1px solid var(--border); font-size:13px; }
+    footer span { color: var(--orange); }
+
+    /* TOGGLE */
+    .toggle-mode { position:fixed; bottom:24px; left:24px; background: var(--orange); color:#080a0f; border:none; border-radius:50%; width:50px; height:50px; font-size:20px; cursor:pointer; box-shadow:0 4px 14px rgba(255,123,0,0.3); transition: transform 0.3s; z-index:99; }
+    .toggle-mode:hover { transform: scale(1.1); }
+
+    /* LIGHT MODE */
+    body.light { --bg:#f5f0e8; --bg2:#fff; --bg3:#f0e8d8; --border:#e0d0c0; --text:#1a1008; --text-muted:#7a6050; --tag-bg:#fff0e0; --tag-border:#ffcc88; }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+    /* DIVIDER */
+    .divider { height:1px; background: var(--border); margin: 0 10%; }
   </style>
 </head>
 <body>
   <header>
-    <h1>پورتفولیوی من</h1>
+    <h1>نِیما</h1>
     <nav>
       <a href="#home">خانه</a>
       <a href="#projects">پروژه‌ها</a>
@@ -59,61 +115,91 @@
   </header>
 
   <section class="hero" id="home">
-    <h2>سلام! من نِیما هستم 👋</h2>
-    <p>طراح وب، عاشق خلق تجربه‌های زیبا در دنیای دیجیتال. این پورتفولیوی شخصی من است که در آن پروژه‌ها و مسیر رشدم را به نمایش می‌گذارم.</p>
-    <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">مشاهده پروژه‌ها</button>
+    <div class="hero-tag">توسعه‌دهنده وب</div>
+    <h2>سلام، من <span>نِیما</span> هستم</h2>
+    <p>طراح و توسعه‌دهنده وب، متخصص در ساخت تجربه‌های دیجیتال زیبا و کاربردی.</p>
+    <div class="btns">
+      <button class="btn-main" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">مشاهده پروژه‌ها</button>
+      <button class="btn-sec" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">تماس با من</button>
+    </div>
   </section>
 
+  <div class="divider"></div>
+
   <section id="projects">
-    <h3>پروژه‌های اخیر من</h3>
+    <div class="section-title">
+      <span>// پروژه‌ها</span>
+      <h3>آخرین کارهای من</h3>
+    </div>
     <div class="projects">
       <div class="card">
-        <img src="https://placehold.co/400x180" alt="project1">
+        <div class="card-img">🛒</div>
         <div class="card-content">
           <h4>وب‌سایت فروشگاهی</h4>
           <p>طراحی واکنش‌گرا و مدرن با HTML، CSS و JavaScript.</p>
+          <span class="card-tag">HTML / CSS</span>
         </div>
       </div>
       <div class="card">
-        <img src="https://placehold.co/400x180" alt="project2">
+        <div class="card-img">✅</div>
         <div class="card-content">
-          <h4>وب‌اپلیکیشن مدیریت کارها</h4>
+          <h4>مدیریت کارها</h4>
           <p>برنامه‌ریزی روزانه با رابط کاربری ساده و کاربردی.</p>
+          <span class="card-tag">JavaScript</span>
         </div>
       </div>
       <div class="card">
-        <img src="https://placehold.co/400x180" alt="project3">
+        <div class="card-img">👤</div>
         <div class="card-content">
           <h4>پورتفولیوی شخصی</h4>
-          <p>نمایش مهارت‌ها و پروژه‌ها با طراحی جذاب و سبک تیره.</p>
+          <p>نمایش مهارت‌ها و پروژه‌ها با طراحی جذاب و مدرن.</p>
+          <span class="card-tag">HTML / CSS</span>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <section id="about">
-    <h3>درباره من</h3>
+    <div class="section-title">
+      <span>// درباره من</span>
+      <h3>کی هستم</h3>
+    </div>
     <div class="about">
-      <img src="https://placehold.co/250x250" alt="Profile">
+      <img src="images/profile.jpg" alt="نِیما" onerror="this.src='https://placehold.co/220x220'">
       <div class="about-text">
         <p>من نِیما هستم، طراح و توسعه‌دهنده وب با علاقه به رابط کاربری و تجربه کاربر. در طراحی‌هایم سادگی، سرعت و هماهنگی اهمیت زیادی دارد.</p>
-        <p>مهارت‌ها: HTML، CSS، JavaScript، طراحی واکنش‌گرا، UX/UI</p>
+        <p>دانشجوی ترم چهارم مهندسی کامپیوتر — در حال یادگیری و ساختن.</p>
+        <div class="skills">
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">Python</span>
+          <span class="skill">Git</span>
+          <span class="skill">Linux</span>
+          <span class="skill">JavaScript</span>
+        </div>
       </div>
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <section id="contact">
-    <h3>تماس با من</h3>
-    <form>
-      <input type="text" placeholder="نام شما" required>
-      <input type="email" placeholder="ایمیل" required>
-      <textarea rows="5" placeholder="پیام شما"></textarea>
-      <button class="btn" type="submit">ارسال</button>
+    <div class="section-title">
+      <span>// تماس</span>
+      <h3>با من در ارتباط باش</h3>
+    </div>
+    <form action="https://formspree.io/f/mqeonkav" method="POST">
+      <input type="text" name="name" placeholder="نام شما" required>
+      <input type="email" name="email" placeholder="ایمیل" required>
+      <textarea name="message" rows="5" placeholder="پیام شما" required></textarea>
+      <button class="btn-main" type="submit">ارسال پیام</button>
     </form>
   </section>
 
   <footer>
-    © ۲۰۲۵ طراحی شده توسط نِیما | تمامی حقوق محفوظ است
+    © ۲۰۲۵ ساخته شده توسط <span>نِیما</span> | تمامی حقوق محفوظ است
   </footer>
 
   <button class="toggle-mode" onclick="toggleMode()">☀️</button>
@@ -121,9 +207,21 @@
   <script>
     function toggleMode(){
       document.body.classList.toggle('light');
-      const btn=document.querySelector('.toggle-mode');
-      btn.textContent=document.body.classList.contains('light')?'🌙':'☀️';
+      const btn = document.querySelector('.toggle-mode');
+      btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 150);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
   </script>
 </body>
 </html>
