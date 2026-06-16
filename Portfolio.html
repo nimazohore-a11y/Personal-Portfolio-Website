@@ -36,24 +36,8 @@
     .sky { position:fixed; inset:0; z-index:-1; overflow:hidden; background: linear-gradient(160deg,#060814 0%,#0a0e1f 45%,#0d1126 100%); transition: background 0.6s ease; }
     body.light .sky { background: linear-gradient(180deg,#6fb9f2 0%,#a9dcf7 45%,#eaf7ff 100%); }
 
-    .stars { position:absolute; inset:-10%; opacity:1; transition: opacity 0.5s ease;
-      background-image:
-        radial-gradient(2px 2px at 8% 20%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 22% 65%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 35% 12%, #fff, transparent 60%),
-        radial-gradient(2px 2px at 48% 50%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 60% 28%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 73% 75%, #fff, transparent 60%),
-        radial-gradient(2px 2px at 85% 18%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 93% 55%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 15% 90%, #fff, transparent 60%),
-        radial-gradient(1.5px 1.5px at 65% 92%, #fff, transparent 60%);
-      background-repeat: repeat;
-      background-size: 380px 380px;
-      animation: twinkle 4.5s ease-in-out infinite alternate;
-    }
-    body.light .stars { opacity:0; animation:none; }
-    @keyframes twinkle { from{ opacity:.55; } to{ opacity:1; } }
+    #starCanvas { position:absolute; inset:0; width:100%; height:100%; opacity:1; transition: opacity 0.5s ease; }
+    body.light #starCanvas { opacity:0; }
 
     .moon { position:absolute; top:65px; right:13%; width:84px; height:84px; border-radius:50%; background: radial-gradient(circle at 35% 30%, #ffffff, #d7dbe6 60%, #aab0c4 100%); box-shadow: 0 0 60px 14px rgba(220,225,245,0.3); opacity:1; transition: opacity 0.5s ease; }
     .moon .crater { position:absolute; border-radius:50%; background: rgba(140,145,165,0.45); }
@@ -91,7 +75,7 @@
 
     /* HEADER */
     header { display:flex; justify-content:space-between; align-items:center; padding:16px 50px; background: rgba(13,16,24,0.9); position:sticky; top:0; z-index:100; border-bottom:1px solid var(--border); backdrop-filter: blur(10px); }
-    header h1 { color: var(--orange); font-weight:700; font-size:20px; }
+    header h1 { color: var(--orange); font-weight:700; font-size:20px; animation: nimaFlicker 2.8s ease-in-out infinite; }
     nav a { color: #9aa3c4; text-decoration:none; margin:0 10px; transition:color 0.3s; font-size:14px; position: relative; }
     nav a::after { content:''; position:absolute; bottom:-4px; right:0; width:0; height:2px; background:var(--orange); transition: width 0.3s; }
     nav a:hover { color: var(--orange); }
@@ -232,13 +216,37 @@
     /* ANIMATIONS */
     @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
+
+    /* NIMA FIRE GLOW */
+    .nima-glow {
+      display: inline-block;
+      color: var(--orange);
+      animation: nimaFlicker 2.8s ease-in-out infinite;
+      text-shadow:
+        0 0 8px rgba(255,123,0,0.9),
+        0 0 20px rgba(255,123,0,0.6),
+        0 0 40px rgba(255,80,0,0.4),
+        0 0 70px rgba(255,50,0,0.2);
+    }
+    @keyframes nimaFlicker {
+      0%   { text-shadow: 0 0 8px rgba(255,123,0,0.9), 0 0 20px rgba(255,123,0,0.6), 0 0 40px rgba(255,80,0,0.4); color: #ff7b00; }
+      20%  { text-shadow: 0 0 14px rgba(255,150,0,1), 0 0 35px rgba(255,120,0,0.9), 0 0 65px rgba(255,80,0,0.5), 0 0 100px rgba(255,40,0,0.3); color: #ffaa33; }
+      40%  { text-shadow: 0 0 5px rgba(255,100,0,0.7), 0 0 14px rgba(255,70,0,0.4); color: #ff6600; }
+      60%  { text-shadow: 0 0 16px rgba(255,160,0,1), 0 0 38px rgba(255,130,0,0.9), 0 0 70px rgba(255,90,0,0.5); color: #ffbb44; }
+      80%  { text-shadow: 0 0 9px rgba(255,120,0,0.9), 0 0 22px rgba(255,90,0,0.6); color: #ff8811; }
+      100% { text-shadow: 0 0 8px rgba(255,123,0,0.9), 0 0 20px rgba(255,123,0,0.6), 0 0 40px rgba(255,80,0,0.4); color: #ff7b00; }
+    }
+
+    /* card images */
+    .card-img img { width:100%; height:100%; object-fit:cover; display:block; }
+
     /* DIVIDER */
     .divider { height:1px; background: var(--border); margin: 0 10%; }
   </style>
 </head>
 <body>
   <div class="sky" aria-hidden="true">
-    <div class="stars"></div>
+    <canvas id="starCanvas"></canvas>
     <div class="moon">
       <span class="crater c1"></span>
       <span class="crater c2"></span>
@@ -264,7 +272,7 @@
   <section class="hero" id="home">
     <div class="hero-glass glass">
       <div class="hero-tag">توسعه‌دهنده وب</div>
-      <h2>سلام، من <span>نِیما</span> هستم</h2>
+      <h2>سلام، من <span class="nima-glow">نِیما</span> هستم</h2>
       <p>طراح و توسعه‌دهنده وب، متخصص در ساخت تجربه‌های دیجیتال زیبا و کاربردی.</p>
       <div class="hero-social">
         <a href="https://www.instagram.com/alpha_web?igsh=MWhqeXJoMjBiNnRhZw==" target="_blank">
@@ -287,7 +295,7 @@
     </div>
     <div class="projects">
       <div class="card">
-        <div class="card-img">🛒</div>
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&h=180&fit=crop" alt="فروشگاه آنلاین"></div>
         <div class="card-content">
           <h4>وب‌سایت فروشگاهی</h4>
           <p>طراحی واکنش‌گرا و مدرن با HTML، CSS و JavaScript.</p>
@@ -295,7 +303,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-img">✅</div>
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=180&fit=crop" alt="مدیریت کارها"></div>
         <div class="card-content">
           <h4>مدیریت کارها</h4>
           <p>برنامه‌ریزی روزانه با رابط کاربری ساده و کاربردی.</p>
@@ -303,7 +311,7 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-img">👤</div>
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=400&h=180&fit=crop" alt="پورتفولیو"></div>
         <div class="card-content">
           <h4>پورتفولیوی شخصی</h4>
           <p>نمایش مهارت‌ها و پروژه‌ها با طراحی جذاب و مدرن.</p>
@@ -321,7 +329,7 @@
       <h3>کی هستم</h3>
     </div>
     <div class="about">
-      <img src="assets/profile-404.png" alt="نِیما" onerror="this.src='https://placehold.co/220x220'">
+      <img src="profile/lost-in-space-404-5120x2880-18155.png" alt ="نیما" onerror="this.src='https://placehold.co/220x220'">
       <div class="about-text glass">
         <p>من نِیما هستم، طراح و توسعه‌دهنده وب با علاقه به رابط کاربری و تجربه کاربر. در طراحی‌هایم سادگی، سرعت و هماهنگی اهمیت زیادی دارد.</p>
         <p>دانشجوی ترم چهارم مهندسی کامپیوتر — در حال یادگیری و ساختن.</p>
@@ -354,12 +362,134 @@
   </section>
 
   <footer>
-    © ۲۰۲۵ ساخته شده توسط <span>نِیما</span> | تمامی حقوق محفوظ است
+    © ۲۰۲۵ ساخته شده توسط <span class="nima-glow">نِیما</span> | تمامی حقوق محفوظ است
   </footer>
 
   <button class="toggle-mode" onclick="toggleMode()">☀️</button>
 
   <script>
+    /* ── STAR CANVAS ── */
+    (function(){
+      const canvas = document.getElementById('starCanvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, stars = [], shooters = [];
+
+      function resize(){
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      /* build stars */
+      const STAR_COUNT = 220;
+      for(let i=0;i<STAR_COUNT;i++){
+        const angle = Math.random()*Math.PI*2;
+        const spd = Math.random()*0.12 + 0.02;
+        stars.push({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          ox: 0, oy: 0,  /* drift offset */
+          dx: Math.cos(angle)*spd,
+          dy: Math.sin(angle)*spd,
+          r: Math.random()*1.5 + 0.3,
+          base: Math.random()*0.45 + 0.25,
+          twinkleSpeed: Math.random()*0.04 + 0.01,
+          twinkleAmp: Math.random()*0.5 + 0.3,
+          phase: Math.random()*Math.PI*2
+        });
+      }
+
+      /* shooting star factory */
+      function spawnShooter(){
+        const angle = (Math.random()*30 + 20) * Math.PI/180; /* 20-50° */
+        const startX = Math.random()*W*0.7;
+        const startY = Math.random()*H*0.3;
+        const len = Math.random()*160 + 80;
+        shooters.push({
+          x: startX, y: startY,
+          vx: Math.cos(angle)*9,
+          vy: Math.sin(angle)*9,
+          len, tail: len,
+          alpha: 1, fade: 0.015
+        });
+      }
+
+      /* schedule random shooting stars */
+      function scheduleShooter(){
+        const delay = Math.random()*5000 + 3000; /* 3-8 s */
+        setTimeout(()=>{ spawnShooter(); scheduleShooter(); }, delay);
+      }
+      scheduleShooter();
+
+      let t = 0;
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+
+        /* twinkling + drifting stars */
+        stars.forEach(s=>{
+          /* drift */
+          s.ox += s.dx;
+          s.oy += s.dy;
+          /* gentle wrap with soft boundary */
+          const nx = (s.x + s.ox + W) % W;
+          const ny = (s.y + s.oy + H) % H;
+
+          const op = s.base + Math.sin(t*s.twinkleSpeed + s.phase)*s.twinkleAmp;
+          const clamped = Math.max(0,Math.min(1,op));
+
+          /* bigger stars get a soft glow */
+          if(s.r > 1.1){
+            const glow = ctx.createRadialGradient(nx,ny,0,nx,ny,s.r*4);
+            glow.addColorStop(0, `rgba(255,255,255,${clamped*0.4})`);
+            glow.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.beginPath();
+            ctx.arc(nx, ny, s.r*4, 0, Math.PI*2);
+            ctx.fillStyle = glow;
+            ctx.fill();
+          }
+
+          ctx.beginPath();
+          ctx.arc(nx, ny, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(255,255,255,${clamped})`;
+          ctx.fill();
+        });
+
+        /* shooting stars */
+        shooters = shooters.filter(sh=>{
+          sh.x += sh.vx; sh.y += sh.vy;
+          sh.alpha -= sh.fade;
+          if(sh.alpha <= 0) return false;
+
+          const grad = ctx.createLinearGradient(
+            sh.x - sh.vx*(sh.tail/9), sh.y - sh.vy*(sh.tail/9),
+            sh.x, sh.y
+          );
+          grad.addColorStop(0, `rgba(255,255,255,0)`);
+          grad.addColorStop(1, `rgba(255,255,255,${sh.alpha})`);
+
+          ctx.beginPath();
+          ctx.moveTo(sh.x - sh.vx*(sh.tail/9), sh.y - sh.vy*(sh.tail/9));
+          ctx.lineTo(sh.x, sh.y);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          /* tiny glow at head */
+          ctx.beginPath();
+          ctx.arc(sh.x, sh.y, 2, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(255,255,255,${sh.alpha})`;
+          ctx.fill();
+
+          return true;
+        });
+
+        t++;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
     function toggleMode(){
       document.body.classList.toggle('light');
       const btn = document.querySelector('.toggle-mode');
